@@ -1,0 +1,7 @@
+9.03.2017 :
+Pre-soutenance. Debut de recherches sur la maniere d'implementer les deux types
+de fourmis + refamiliarisation avec Netlogo.
+Idee : detailler le fonctionnement du code sur papier puis modifier cette version "haut niveau" pour y implanter la gestion des differentes fourmis
+puis recoder cette nouvelle version dans netlogo.
+
+
