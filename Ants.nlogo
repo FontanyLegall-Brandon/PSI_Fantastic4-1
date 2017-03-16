@@ -289,6 +289,36 @@ poucentage
 NIL
 HORIZONTAL
 
+TEXTBOX
+808
+135
+1058
+153
+Fourmis Rouges : Les ramasseuses
+12
+15.0
+1
+
+TEXTBOX
+808
+150
+1224
+168
+Fourmis Oranges : Ramasseuses comportant de la nourriture
+12
+25.0
+1
+
+TEXTBOX
+808
+166
+1125
+184
+Fourmis Bleues : Fourmis chercheuses
+12
+105.0
+1
+
 @#$#@#$#@
 ## WHAT IS IT?
 
