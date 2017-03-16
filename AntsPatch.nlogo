@@ -1,4 +1,4 @@
-globals [x y patchs-number]
+globals [nb-food-sources] ;; CORTO
 
 patches-own [
   chemical             ;; amount of chemical on this patch
@@ -28,7 +28,26 @@ to setup-patches
   [ setup-nest
     setup-food
     recolor-patch ]
+  set nb-food-sources 3 ;; CORTO ;; 3 food source have been created
 end
+
+to create-patch ;; --CORTO
+  set nb-food-sources nb-food-sources + 1
+  ask patches
+  [ if (distancexy x y) < 5 ;; setup food source at the given coordinates
+    [  ;; add a new food source
+      set food-source-number nb-food-sources 
+      set nest? (distancexy 0 0) < 5
+      set nest-scent 200 - distancexy 0 0
+      if food-source-number > 0
+       [ set food one-of [1 2] ]
+    ]
+    ;; setup color periodically
+    recolor-patch
+  ]
+end
+  
+  
 
 to setup-nest  ;; patch procedure
   ;; set nest? variable to true inside the nest, false elsewhere
@@ -47,6 +66,9 @@ to setup-food  ;; patch procedure
   ;; setup food source three on the upper-left
   if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
   [ set food-source-number 3 ]
+  
+  
+  
   ;; set "food" at sources to either 1 or 2, randomly
   if food-source-number > 0
   [ set food one-of [1 2] ]
@@ -59,7 +81,21 @@ to recolor-patch  ;; patch procedure
   [ ifelse food > 0
     [ if food-source-number = 1 [ set pcolor cyan ]
       if food-source-number = 2 [ set pcolor sky  ]
-      if food-source-number = 3 [ set pcolor blue ] ]
+      if food-source-number = 3 [ set pcolor blue ]
+      
+      ;; CORTO
+      if food-source-number > 3
+      [ ifelse food-source-number mod 4 = 0
+        [ set pcolor magenta ]
+        [ ifelse food-source-number mod 4 = 1
+          [ set pcolor pink]
+          [ ifelse food-source-number mod 4 = 2
+            [ set pcolor red ]
+            [ set pcolor white ] ;; 4th case
+          ]
+        ]
+      ]
+    ]
     ;; scale color to show chemical concentration
     [ set pcolor scale-color green chemical 0.1 5 ] ]
 end
@@ -82,21 +118,11 @@ to go  ;; forever button
     recolor-patch ]
   tick
 end
-
-
-
-;;;;; PATCH WORK ;;;;;
-to spawn-patch
-  if (distancexy x y) < 5
-  [ set food-source-number patchs-number + 1 ]
-end
-  
-  
-  
-  
-  
-  
-  
+ 
+;to spawn-patch ;;-- CORTO
+;  if (distancexy x y) < 5
+;  [ set food-source-number patchs-number + 1 ]
+;end  
 
 to return-to-nest  ;; turtle procedure
   ifelse nest?
@@ -211,15 +237,15 @@ NIL
 1
 
 SLIDER
-31
-106
-221
-139
+34
+103
+224
+136
 diffusion-rate
 diffusion-rate
 0.0
 99.0
-50
+53
 1.0
 1
 NIL
@@ -273,10 +299,10 @@ NIL
 HORIZONTAL
 
 PLOT
-5
-197
-248
-476
+800
+10
+1325
+479
 Food in each pile
 time
 food
@@ -285,12 +311,62 @@ food
 0.0
 120.0
 true
-false
+true
 "" ""
 PENS
 "food-in-pile1" 1.0 0 -11221820 true "" "plotxy ticks sum [food] of patches with [pcolor = cyan]"
 "food-in-pile2" 1.0 0 -13791810 true "" "plotxy ticks sum [food] of patches with [pcolor = sky]"
 "food-in-pile3" 1.0 0 -13345367 true "" "plotxy ticks sum [food] of patches with [pcolor = blue]"
+"food-in-pile4" 1.0 0 -5825686 true "" "plotxy ticks sum [food] of patches with [pcolor = magenta\n]"
+"food-in-pile5" 1.0 0 -2064490 true "" "plotxy ticks sum [food] of patches with [pcolor = pink]"
+"food-in-pile6" 1.0 0 -2674135 true "" "plotxy ticks sum [food] of patches with [pcolor = red]"
+
+SLIDER
+40
+251
+212
+284
+x
+x
+-57
+57
+32
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+39
+291
+211
+324
+y
+y
+-48
+48
+-17
+1
+1
+NIL
+HORIZONTAL
+
+BUTTON
+63
+206
+188
+239
+NIL
+create-patch
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?

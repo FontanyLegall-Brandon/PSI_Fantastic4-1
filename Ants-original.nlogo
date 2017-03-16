@@ -1,5 +1,3 @@
-globals [nb-food-sources] ;; CORTO
-
 patches-own [
   chemical             ;; amount of chemical on this patch
   food                 ;; amount of food on this patch (0, 1, or 2)
@@ -15,10 +13,7 @@ patches-own [
 to setup
   clear-all
   set-default-shape turtles "bug"
-  crt population - ((population / 100) * (100 - pourcentage))
-  [ set size 2         ;; easier to see
-    set color blue  ]   ;; blue = finders
-  crt population - ((population / 100) * pourcentage)
+  crt population
   [ set size 2         ;; easier to see
     set color red  ]   ;; red = not carrying food
   setup-patches
@@ -30,23 +25,6 @@ to setup-patches
   [ setup-nest
     setup-food
     recolor-patch ]
-set nb-food-sources 3 ;; CORTO ;; 3 food source have been created
-end
-
-to create-patch ;; --CORTO
-  set nb-food-sources nb-food-sources + 1
-  ask patches
-  [ if (distancexy x y) < 5 ;; setup food source at the given coordinates
-    [  ;; add a new food source
-      set food-source-number nb-food-sources 
-      set nest? (distancexy 0 0) < 5
-      set nest-scent 200 - distancexy 0 0
-      if food-source-number > 0
-       [ set food one-of [1 2] ]
-    ]
-    ;; setup color periodically
-    recolor-patch
-  ]
 end
 
 to setup-nest  ;; patch procedure
@@ -78,21 +56,7 @@ to recolor-patch  ;; patch procedure
   [ ifelse food > 0
     [ if food-source-number = 1 [ set pcolor cyan ]
       if food-source-number = 2 [ set pcolor sky  ]
-      if food-source-number = 3 [ set pcolor blue ]
-
-	;; CORTO
-      if food-source-number > 3
-      [ ifelse food-source-number mod 4 = 0
-        [ set pcolor magenta ]
-        [ ifelse food-source-number mod 4 = 1
-          [ set pcolor pink]
-          [ ifelse food-source-number mod 4 = 2
-            [ set pcolor red ]
-            [ set pcolor white ] ;; 4th case
-          ]
-        ]
-      ]
-    ]
+      if food-source-number = 3 [ set pcolor blue ] ]
     ;; scale color to show chemical concentration
     [ set pcolor scale-color green chemical 0.1 5 ] ]
 end
@@ -104,11 +68,11 @@ end
 to go  ;; forever button
   ask turtles
   [ if who >= ticks [ stop ] ;; delay initial departure
-    ifelse color = red or color = blue
-      [ look-for-food ] ;; not carrying food? look for it
-    [ return-to-nest ]     ;; carrying food? take it back to nest
+    ifelse color = red
+    [ look-for-food  ]       ;; not carrying food? look for it
+    [ return-to-nest ]       ;; carrying food? take it back to nest
     wiggle
-    fd 1]
+    fd 1 ]
   diffuse chemical (diffusion-rate / 100)
   ask patches
   [ set chemical chemical * (100 - evaporation-rate) / 100  ;; slowly evaporate chemical
@@ -119,22 +83,16 @@ end
 to return-to-nest  ;; turtle procedure
   ifelse nest?
   [ ;; drop food and head out again
-    ifelse color = orange [
     set color red
     rt 180 ]
-    [ set color blue]]
-  [ if color = green [
-    set chemical chemical + 60  ;; drop some chemical
-    ]]         ;; head toward the greatest value of nest-scent
-  uphill-nest-scent 
+  [ set chemical chemical + 60  ;; drop some chemical
+    uphill-nest-scent ]         ;; head toward the greatest value of nest-scent
 end
 
 to look-for-food  ;; turtle procedure
   if food > 0
-  [ ifelse color = red 
-    [set color orange     ;; pick up food
-    set food food - 1]        ;; and reduce the food source
-    [ set color green]
+  [ set color orange + 1     ;; pick up food
+    set food food - 1        ;; and reduce the food source
     rt 180                   ;; and turn around
     stop ]
   ;; go in the direction where the chemical smell is strongest
@@ -191,10 +149,10 @@ end
 ; See Info tab for full copyright and license.
 @#$#@#$#@
 GRAPHICS-WINDOW
-251
-26
-758
-554
+257
+10
+764
+538
 35
 35
 7.0
@@ -218,10 +176,10 @@ ticks
 30.0
 
 BUTTON
-40
-87
-120
-120
+46
+71
+126
+104
 NIL
 setup
 NIL
@@ -234,81 +192,41 @@ NIL
 NIL
 1
 
-TEXTBOX
-810
-133
-1060
-151
-Fourmis Rouges : Les ramasseuses
-12
-15.0
-1
-
-TEXTBOX
-810
-148
-1226
-166
-Fourmis Oranges : Ramasseuses comportant de la nourriture
-12
-25.0
-1
-
-TEXTBOX
-810
-164
-1127
-182
-Fourmis Bleues : Les chercheuses
-12
-105.0
-1
-
-TEXTBOX
-809
-179
-1228
-197
-Fourmis Vertes : Chercheuses deposant des pheromones
-12
-55.0
-1
-
 SLIDER
-27
-182
-217
-215
+31
+106
+221
+139
 diffusion-rate
 diffusion-rate
 0.0
 99.0
-42
+50
 1.0
 1
 NIL
 HORIZONTAL
 
 SLIDER
-28
-220
-218
-253
+31
+141
+221
+174
 evaporation-rate
 evaporation-rate
 0.0
 99.0
-7
+10
 1.0
 1
 NIL
 HORIZONTAL
 
 BUTTON
-130
-87
-205
-120
+136
+71
+211
+104
 NIL
 go
 T
@@ -322,25 +240,25 @@ NIL
 0
 
 SLIDER
-25
-52
-215
-85
+31
+36
+221
+69
 population
 population
 0.0
 200.0
-150
+125
 1.0
 1
 NIL
 HORIZONTAL
 
 PLOT
-796
-24
-1321
-493
+5
+197
+248
+476
 Food in each pile
 time
 food
@@ -349,117 +267,12 @@ food
 0.0
 120.0
 true
-true
+false
 "" ""
 PENS
 "food-in-pile1" 1.0 0 -11221820 true "" "plotxy ticks sum [food] of patches with [pcolor = cyan]"
 "food-in-pile2" 1.0 0 -13791810 true "" "plotxy ticks sum [food] of patches with [pcolor = sky]"
 "food-in-pile3" 1.0 0 -13345367 true "" "plotxy ticks sum [food] of patches with [pcolor = blue]"
-"food-in-pile4" 1.0 0 -5825686 true "" "plotxy ticks sum [food] of patches with [pcolor = magenta\n]"
-"food-in-pile5" 1.0 0 -2064490 true "" "plotxy ticks sum [food] of patches with [pcolor = pink]"
-"food-in-pile6" 1.0 0 -2674135 true "" "plotxy ticks sum [food] of patches with [pcolor = red]"
-
-SLIDER
-35
-333
-207
-366
-x
-x
--57
-57
-32
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-34
-373
-206
-406
-y
-y
--48
-48
-16
-1
-1
-NIL
-HORIZONTAL
-
-BUTTON
-58
-291
-183
-324
-NIL
-create-patch
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-SLIDER
-23
-10
-214
-43
-pourcentage
-pourcentage
-1
-100
-60
-1
-1
-NIL
-HORIZONTAL
-
-TEXTBOX
-249
-572
-522
-590
-Fourmis rouges : Les ramasseuses
-12
-15.0
-1
-
-TEXTBOX
-251
-589
-662
-607
-Fourmis Oranges : Ramasseusses comportant de la nourriture
-12
-25.0
-1
-
-TEXTBOX
-249
-607
-458
-625
-Fourmis Bleues : Chercheuses
-12
-105.0
-1
-
-TEXTBOX
-250
-627
-678
-646
-Fourmis Vertes : Chercheuses déposant des phéromones
-12
-55.0
-1
 
 @#$#@#$#@
 ## WHAT IS IT?
