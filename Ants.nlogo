@@ -281,7 +281,7 @@ SLIDER
 80
 poucentage
 poucentage
-1
+0
 100
 50
 1
