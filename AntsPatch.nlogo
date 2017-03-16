@@ -45,8 +45,6 @@ to create-patch ;; --CORTO
     ;; setup color periodically
     recolor-patch
   ]
-  
-  
 end
   
   

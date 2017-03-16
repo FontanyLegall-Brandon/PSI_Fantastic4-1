@@ -193,8 +193,8 @@ end
 GRAPHICS-WINDOW
 251
 26
-758
-554
+757
+553
 35
 35
 7.0
@@ -234,56 +234,16 @@ NIL
 NIL
 1
 
-TEXTBOX
-810
-133
-1060
-151
-Fourmis Rouges : Les ramasseuses
-12
-15.0
-1
-
-TEXTBOX
-810
-148
-1226
-166
-Fourmis Oranges : Ramasseuses comportant de la nourriture
-12
-25.0
-1
-
-TEXTBOX
-810
-164
-1127
-182
-Fourmis Bleues : Les chercheuses
-12
-105.0
-1
-
-TEXTBOX
-809
-179
-1228
-197
-Fourmis Vertes : Chercheuses deposant des pheromones
-12
-55.0
-1
-
 SLIDER
-27
-182
-217
+25
+179
 215
+212
 diffusion-rate
 diffusion-rate
 0.0
 99.0
-42
+88
 1.0
 1
 NIL
@@ -337,10 +297,10 @@ NIL
 HORIZONTAL
 
 PLOT
-796
-24
-1321
-493
+794
+26
+1319
+495
 Food in each pile
 time
 food
@@ -368,7 +328,7 @@ x
 x
 -57
 57
-32
+9
 1
 1
 NIL
@@ -391,9 +351,9 @@ HORIZONTAL
 
 BUTTON
 58
-291
+288
 183
-324
+321
 NIL
 create-patch
 NIL
@@ -407,58 +367,28 @@ NIL
 1
 
 SLIDER
-23
+28
 10
-214
+200
 43
 pourcentage
 pourcentage
 1
 100
-60
+50
 1
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-249
-572
-522
-590
-Fourmis rouges : Les ramasseuses
+269
+599
+419
+617
+Fourmis rouges : 
 12
-15.0
-1
-
-TEXTBOX
-251
-589
-662
-607
-Fourmis Oranges : Ramasseusses comportant de la nourriture
-12
-25.0
-1
-
-TEXTBOX
-249
-607
-458
-625
-Fourmis Bleues : Chercheuses
-12
-105.0
-1
-
-TEXTBOX
-250
-627
-678
-646
-Fourmis Vertes : Chercheuses déposant des phéromones
-12
-55.0
+0.0
 1
 
 @#$#@#$#@
