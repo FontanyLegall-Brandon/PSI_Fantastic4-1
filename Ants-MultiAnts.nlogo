@@ -71,7 +71,7 @@ end
 to go  ;; forever button
   ask turtles
   [ if who >= ticks [ stop ] ;; delay initial departure
-    ifelse color != orange
+    ifelse color != orange + 1
     [ look-for-food  ]       ;; not carrying food? look for it
     [ return-to-nest ]     ;; carrying food? take it back to nest
     wiggle
