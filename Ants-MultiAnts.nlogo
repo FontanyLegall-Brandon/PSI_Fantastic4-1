@@ -13,10 +13,10 @@ patches-own [
 to setup
   clear-all
   set-default-shape turtles "bug"
-  crt population - ((population / 100) * 50)
+  crt population - ((population / 100) * (100 - pourcentage))
   [ set size 2         ;; easier to see
     set color blue  ]   ;; blue = finders
-  crt population - ((population / 100) * 50)
+  crt population - ((population / 100) * pourcentage)
   [ set size 2         ;; easier to see
     set color red  ]   ;; red = not carrying food
   setup-patches
