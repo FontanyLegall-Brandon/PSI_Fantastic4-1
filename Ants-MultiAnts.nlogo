@@ -94,28 +94,19 @@ to return-to-nest  ;; turtle procedure
     uphill-nest-scent ]         ;; head toward the greatest value of nest-scent
 end
 
-to search-for-food  ;; turtle procedure
-  if food > 0
-  [ set color green     ;; pick up food
-    set food food - 1        ;; and reduce the food source
-    rt 180                   ;; and turn around
-    stop ]
-  ;; go in the direction where the chemical smell is strongest
-  if (chemical >= 0.05) and (chemical < 2)
-  [ uphill-chemical ]
-end
-
 to look-for-food  ;; turtle procedure
   if food > 0
   [ ifelse color = red 
     [set color orange     ;; pick up food
-    set food food - 1]        ;; and reduce the food source
+    set food food - 1
+    if (chemical >= 0.05) and (chemical < 2)
+    [ uphill-chemical ]
+    ]        ;; and reduce the food source
     [ set color green]
     rt 180                   ;; and turn around
     stop ]
   ;; go in the direction where the chemical smell is strongest
-  if (chemical >= 0.05) and (chemical < 2)
-  [ uphill-chemical ]
+  
 end
 
 ;; sniff left and right, and go where the strongest smell is
