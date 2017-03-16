@@ -15,10 +15,10 @@ to setup
   set-default-shape turtles "bug"
   crt population - ((population / 100) * 50)
   [ set size 2         ;; easier to see
-    set color red  ]   ;; red = not carrying food
+    set color blue  ]   ;; blue = finders
   crt population - ((population / 100) * 50)
   [ set size 2         ;; easier to see
-    set color blue  ]   ;; blue = finders
+    set color red  ]   ;; red = not carrying food
   setup-patches
   reset-ticks
 end
@@ -71,8 +71,8 @@ end
 to go  ;; forever button
   ask turtles
   [ if who >= ticks [ stop ] ;; delay initial departure
-    ifelse color != orange + 1
-    [ look-for-food  ]       ;; not carrying food? look for it
+    ifelse color = red or color = blue
+      [ look-for-food ] ;; not carrying food? look for it
     [ return-to-nest ]     ;; carrying food? take it back to nest
     wiggle
     fd 1]
@@ -86,16 +86,31 @@ end
 to return-to-nest  ;; turtle procedure
   ifelse nest?
   [ ;; drop food and head out again
+    ifelse color = orange [
     set color red
     rt 180 ]
+    [ set color blue]]
   [ set chemical chemical + 60  ;; drop some chemical
     uphill-nest-scent ]         ;; head toward the greatest value of nest-scent
 end
 
+to search-for-food  ;; turtle procedure
+  if food > 0
+  [ set color green     ;; pick up food
+    set food food - 1        ;; and reduce the food source
+    rt 180                   ;; and turn around
+    stop ]
+  ;; go in the direction where the chemical smell is strongest
+  if (chemical >= 0.05) and (chemical < 2)
+  [ uphill-chemical ]
+end
+
 to look-for-food  ;; turtle procedure
   if food > 0
-  [ set color orange + 1     ;; pick up food
-    set food food - 1        ;; and reduce the food source
+  [ ifelse color = red 
+    [set color orange     ;; pick up food
+    set food food - 1]        ;; and reduce the food source
+    [ set color green]
     rt 180                   ;; and turn around
     stop ]
   ;; go in the direction where the chemical smell is strongest
@@ -204,7 +219,7 @@ diffusion-rate
 diffusion-rate
 0.0
 99.0
-50
+49
 1.0
 1
 NIL
@@ -320,6 +335,16 @@ TEXTBOX
 Fourmis Bleues : Les chercheuses
 12
 105.0
+1
+
+TEXTBOX
+807
+181
+1226
+199
+Fourmis Vertes : Chercheuses deposant des pheromones
+12
+55.0
 1
 
 @#$#@#$#@
