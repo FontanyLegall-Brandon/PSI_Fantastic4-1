@@ -177,9 +177,9 @@ ticks
 
 BUTTON
 46
-71
+85
 126
-104
+118
 NIL
 setup
 NIL
@@ -194,9 +194,9 @@ NIL
 
 SLIDER
 31
-106
+120
 221
-139
+153
 diffusion-rate
 diffusion-rate
 0.0
@@ -209,9 +209,9 @@ HORIZONTAL
 
 SLIDER
 31
-141
+155
 221
-174
+188
 evaporation-rate
 evaporation-rate
 0.0
@@ -224,9 +224,9 @@ HORIZONTAL
 
 BUTTON
 136
-71
+85
 211
-104
+118
 NIL
 go
 T
@@ -240,15 +240,15 @@ NIL
 0
 
 SLIDER
-31
-36
-221
-69
+32
+10
+222
+43
 population
 population
 0.0
 200.0
-125
+120
 1.0
 1
 NIL
@@ -256,9 +256,9 @@ HORIZONTAL
 
 PLOT
 5
-197
+211
 248
-476
+490
 Food in each pile
 time
 food
@@ -273,6 +273,21 @@ PENS
 "food-in-pile1" 1.0 0 -11221820 true "" "plotxy ticks sum [food] of patches with [pcolor = cyan]"
 "food-in-pile2" 1.0 0 -13791810 true "" "plotxy ticks sum [food] of patches with [pcolor = sky]"
 "food-in-pile3" 1.0 0 -13345367 true "" "plotxy ticks sum [food] of patches with [pcolor = blue]"
+
+SLIDER
+42
+47
+214
+80
+poucentage
+poucentage
+1
+100
+50
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
