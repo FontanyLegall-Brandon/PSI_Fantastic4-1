@@ -92,7 +92,8 @@ to return-to-nest  ;; turtle procedure
     [ set color blue]]
   [ if color = green [
     set chemical chemical + 60  ;; drop some chemical
-    uphill-nest-scent ]]         ;; head toward the greatest value of nest-scent
+    ]]         ;; head toward the greatest value of nest-scent
+  uphill-nest-scent 
 end
 
 to look-for-food  ;; turtle procedure
