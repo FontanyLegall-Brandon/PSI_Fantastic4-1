@@ -1,0 +1,4 @@
+16:03:2017
+reprise du projet et
+recherche netlogo pour implémentation du setup des différents patchs
+
