@@ -179,12 +179,12 @@ end
 ; See Info tab for full copyright and license.
 @#$#@#$#@
 GRAPHICS-WINDOW
-251
-26
-758
-554
-35
-35
+204
+10
+781
+608
+40
+40
 7.0
 1
 10
@@ -195,10 +195,10 @@ GRAPHICS-WINDOW
 0
 0
 1
--35
-35
--35
-35
+-40
+40
+-40
+40
 1
 1
 1
@@ -206,9 +206,9 @@ ticks
 30.0
 
 BUTTON
-40
+24
 87
-120
+104
 120
 NIL
 setup
@@ -222,80 +222,40 @@ NIL
 NIL
 1
 
-TEXTBOX
-810
-133
-1060
-151
-Fourmis Rouges : Les ramasseuses
-12
-15.0
-1
-
-TEXTBOX
-810
-148
-1226
-166
-Fourmis Oranges : Ramasseuses comportant de la nourriture
-12
-25.0
-1
-
-TEXTBOX
-810
-164
-1127
-182
-Fourmis Bleues : Les chercheuses
-12
-105.0
-1
-
-TEXTBOX
-809
-179
-1228
-197
-Fourmis Vertes : Chercheuses deposant des pheromones
-12
-55.0
-1
-
 SLIDER
-27
+11
 182
-217
+201
 215
 diffusion-rate
 diffusion-rate
 0.0
 99.0
-42
+61
 1.0
 1
 NIL
 HORIZONTAL
 
 SLIDER
-28
+12
 220
-218
+202
 253
 evaporation-rate
 evaporation-rate
 0.0
 99.0
-7
+76
 1.0
 1
 NIL
 HORIZONTAL
 
 BUTTON
-130
+114
 87
-205
+189
 120
 NIL
 go
@@ -310,9 +270,9 @@ NIL
 0
 
 SLIDER
-25
+9
 52
-215
+199
 85
 population
 population
@@ -325,10 +285,10 @@ NIL
 HORIZONTAL
 
 PLOT
-796
-24
-1321
-493
+787
+25
+1312
+494
 Food in each pile
 time
 food
@@ -340,47 +300,45 @@ true
 true
 "" ""
 PENS
-"food-in-pile1" 1.0 0 -11221820 true "" "plotxy ticks sum [food] of patches with [pcolor = cyan]"
-"food-in-pile2" 1.0 0 -13791810 true "" "plotxy ticks sum [food] of patches with [pcolor = sky]"
-"food-in-pile3" 1.0 0 -13345367 true "" "plotxy ticks sum [food] of patches with [pcolor = blue]"
-"food-in-pile4" 1.0 0 -5825686 true "" "plotxy ticks sum [food] of patches with [pcolor = magenta\n]"
-"food-in-pile5" 1.0 0 -2064490 true "" "plotxy ticks sum [food] of patches with [pcolor = pink]"
-"food-in-pile6" 1.0 0 -2674135 true "" "plotxy ticks sum [food] of patches with [pcolor = red]"
+"food-in-pile1" 1.0 0 -5825686 true "" "plotxy ticks sum [food] of patches with [pcolor = magenta\n]"
+"food-in-pile2" 1.0 0 -2064490 true "" "plotxy ticks sum [food] of patches with [pcolor = pink]"
+"food-in-pile3" 1.0 0 -2674135 true "" "plotxy ticks sum [food] of patches with [pcolor = red]"
+"food-in-pile4" 1.0 0 -1 true "" "plotxy ticks sum [food] of patches with [pcolor = white]"
 
 SLIDER
-35
+19
 333
-207
+191
 366
 x
 x
 -57
 57
--31
+-19
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-34
+18
 373
-206
+190
 406
 y
 y
 -48
 48
--8
+24
 1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-58
+42
 291
-183
+167
 324
 NIL
 create-patch
@@ -395,9 +353,9 @@ NIL
 1
 
 SLIDER
-23
+7
 10
-214
+198
 43
 pourcentage
 pourcentage
@@ -410,40 +368,40 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-249
-572
-522
-590
+803
+502
+1076
+520
 Fourmis rouges : Les ramasseuses
 12
 15.0
 1
 
 TEXTBOX
-251
-589
-662
-607
+805
+519
+1216
+537
 Fourmis Oranges : Ramasseusses comportant de la nourriture
 12
 25.0
 1
 
 TEXTBOX
-249
-607
-458
-625
+803
+537
+1012
+555
 Fourmis Bleues : Chercheuses
 12
 105.0
 1
 
 TEXTBOX
-250
-627
-678
-646
+804
+557
+1232
+576
 Fourmis Vertes : Chercheuses déposant des phéromones
 12
 55.0
