@@ -39,7 +39,7 @@ to create-patch ;; --CORTO
   [ if (distancexy x y) < 5 ;; setup food source at the given coordinates
     [  ;; add a new food source
       set food-source-number nb-food-sources 
-      set nest? (distancexy 0 0) < 5
+      set nest? (distancexy 0 0) < 5 ;;, mais un nouveau patch n'est jamais le nid
       set nest-scent 200 - distancexy 0 0
       if food-source-number > 0
        [ set food one-of [1 2] ]
@@ -102,6 +102,7 @@ end
 ;;;;;;;;;;;;;;;;;;;;;
 
 to go  ;; forever button
+  if (all? patches [food = 0]) [stop]
   ask turtles
   [ if who >= ticks [ stop ] ;; delay initial departure
     ifelse color = red or color = blue
@@ -112,7 +113,10 @@ to go  ;; forever button
   diffuse chemical (diffusion-rate / 100)
   ask patches
   [ set chemical chemical * (100 - evaporation-rate) / 100  ;; slowly evaporate chemical
-    recolor-patch ]
+    recolor-patch 
+    if food = 0
+    [ set nb-food-sources nb-food-sources - 1]
+  ]
   tick
 end
 
@@ -134,7 +138,7 @@ to look-for-food  ;; turtle procedure
   [ ifelse color = red 
     [set color orange     ;; pick up food
     set food food - 1]        ;; and reduce the food source
-    [ set color green]
+    [ set color green] ;; blue ant with food -> turn green
     rt 180                   ;; and turn around
     stop ]
   ;; go in the direction where the chemical smell is strongest
@@ -368,7 +372,7 @@ x
 x
 -57
 57
-32
+18
 1
 1
 NIL
@@ -383,7 +387,7 @@ y
 y
 -48
 48
-16
+-24
 1
 1
 NIL
@@ -415,7 +419,7 @@ pourcentage
 pourcentage
 1
 100
-60
+7
 1
 1
 NIL
