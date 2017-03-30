@@ -102,7 +102,8 @@ end
 ;;;;;;;;;;;;;;;;;;;;;
 
 to go  ;; forever button
-  if (all? patches [food = 0]) [stop]
+  if (all? patches [food = 0]) [
+    stop]
   ask turtles
   [ if who >= ticks [ stop ] ;; delay initial departure
     ifelse color = red or color = blue
@@ -197,10 +198,10 @@ end
 GRAPHICS-WINDOW
 251
 26
-758
-554
-35
-35
+828
+624
+40
+40
 7.0
 1
 10
@@ -211,10 +212,10 @@ GRAPHICS-WINDOW
 0
 0
 1
--35
-35
--35
-35
+-40
+40
+-40
+40
 1
 1
 1
@@ -236,46 +237,6 @@ NIL
 NIL
 NIL
 NIL
-1
-
-TEXTBOX
-810
-133
-1060
-151
-Fourmis Rouges : Les ramasseuses
-12
-15.0
-1
-
-TEXTBOX
-810
-148
-1226
-166
-Fourmis Oranges : Ramasseuses comportant de la nourriture
-12
-25.0
-1
-
-TEXTBOX
-810
-164
-1127
-182
-Fourmis Bleues : Les chercheuses
-12
-105.0
-1
-
-TEXTBOX
-809
-179
-1228
-197
-Fourmis Vertes : Chercheuses deposant des pheromones
-12
-55.0
 1
 
 SLIDER
@@ -341,10 +302,10 @@ NIL
 HORIZONTAL
 
 PLOT
-796
+836
 24
 1321
-493
+481
 Food in each pile
 time
 food
@@ -426,40 +387,40 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-249
-572
+844
+504
+1117
 522
-590
 Fourmis rouges : Les ramasseuses
 12
 15.0
 1
 
 TEXTBOX
-251
-589
-662
-607
+846
+521
+1257
+539
 Fourmis Oranges : Ramasseusses comportant de la nourriture
 12
 25.0
 1
 
 TEXTBOX
-249
-607
-458
-625
+844
+539
+1053
+557
 Fourmis Bleues : Chercheuses
 12
 105.0
 1
 
 TEXTBOX
-250
-627
-678
-646
+845
+559
+1273
+578
 Fourmis Vertes : Chercheuses déposant des phéromones
 12
 55.0
@@ -825,6 +786,41 @@ NetLogo 5.1.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="experiment0" repetitions="1" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>count turtles</metric>
+    <enumeratedValueSet variable="evaporation-rate">
+      <value value="0"/>
+      <value value="10"/>
+      <value value="20"/>
+      <value value="30"/>
+      <value value="40"/>
+      <value value="50"/>
+      <value value="60"/>
+      <value value="70"/>
+      <value value="80"/>
+      <value value="90"/>
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="population">
+      <value value="150"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="x">
+      <value value="18"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="y">
+      <value value="-24"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="diffusion-rate">
+      <value value="42"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="pourcentage">
+      <value value="7"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
