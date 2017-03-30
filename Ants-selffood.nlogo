@@ -231,7 +231,7 @@ diffusion-rate
 diffusion-rate
 0.0
 99.0
-61
+62
 1.0
 1
 NIL
@@ -246,7 +246,7 @@ evaporation-rate
 evaporation-rate
 0.0
 99.0
-76
+7
 1.0
 1
 NIL
@@ -312,9 +312,9 @@ SLIDER
 366
 x
 x
--57
-57
--19
+-40
+40
+-40
 1
 1
 NIL
@@ -327,8 +327,8 @@ SLIDER
 406
 y
 y
--48
-48
+-40
+40
 24
 1
 1
