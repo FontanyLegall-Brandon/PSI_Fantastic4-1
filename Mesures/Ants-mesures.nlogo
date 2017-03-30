@@ -1,4 +1,4 @@
-globals [nb-food-sources] ;; CORTO
+globals [nb-food-sources]
 
 patches-own [
   chemical             ;; amount of chemical on this patch
@@ -28,11 +28,12 @@ end
 to setup-patches
   ask patches
   [ setup-nest
+    setup-food
     recolor-patch ]
-set nb-food-sources 3 ;; CORTO ;; 3 food source have been created
+set nb-food-sources 3 ;; 3 food source have been created
 end
 
-to create-patch ;; --CORTO
+to create-patch
   set nb-food-sources nb-food-sources + 1
   ask patches
   [ if (distancexy x y) < 5 ;; setup food source at the given coordinates
@@ -55,6 +56,21 @@ to setup-nest  ;; patch procedure
   set nest-scent 200 - distancexy 0 0
 end
 
+to setup-food  ;; patch procedure
+  ;; setup food source one on the right
+  if (distancexy 8 10) < 5
+  [ set food-source-number 1 ]
+  ;; setup food source two on the lower-left
+  if (distancexy -10 -13) < 5
+  [ set food-source-number 2 ]
+  ;; setup food source three on the upper-left
+  if (distancexy -5 14) < 5
+  [ set food-source-number 3 ]
+  ;; set "food" at sources to either 1 or 2, randomly
+  if food-source-number > 0
+  [ set food one-of [1 2] ]
+end
+
 to recolor-patch  ;; patch procedure
   ;; give color to nest and food sources
   ifelse nest?
@@ -63,8 +79,6 @@ to recolor-patch  ;; patch procedure
     [ if food-source-number = 1 [ set pcolor cyan ]
       if food-source-number = 2 [ set pcolor sky  ]
       if food-source-number = 3 [ set pcolor blue ]
-
-	;; CORTO
       if food-source-number > 3
       [ ifelse food-source-number mod 4 = 0
         [ set pcolor magenta ]
@@ -86,7 +100,8 @@ end
 ;;;;;;;;;;;;;;;;;;;;;
 
 to go  ;; forever button
-  if (all? patches [food = 0]) [stop]
+  if (all? patches [food = 0]) [
+    stop]
   ask turtles
   [ if who >= ticks [ stop ] ;; delay initial departure
     ifelse color = red or color = blue
@@ -179,10 +194,10 @@ end
 ; See Info tab for full copyright and license.
 @#$#@#$#@
 GRAPHICS-WINDOW
-204
-10
-781
-608
+251
+26
+828
+624
 40
 40
 7.0
@@ -206,9 +221,9 @@ ticks
 30.0
 
 BUTTON
-24
+40
 87
-104
+120
 120
 NIL
 setup
@@ -223,24 +238,24 @@ NIL
 1
 
 SLIDER
-11
+27
 182
-201
+217
 215
 diffusion-rate
 diffusion-rate
 0.0
 99.0
-62
+42
 1.0
 1
 NIL
 HORIZONTAL
 
 SLIDER
-12
+28
 220
-202
+218
 253
 evaporation-rate
 evaporation-rate
@@ -253,9 +268,9 @@ NIL
 HORIZONTAL
 
 BUTTON
-114
+130
 87
-189
+205
 120
 NIL
 go
@@ -270,9 +285,9 @@ NIL
 0
 
 SLIDER
-9
+25
 52
-199
+215
 85
 population
 population
@@ -285,10 +300,10 @@ NIL
 HORIZONTAL
 
 PLOT
-787
-25
-1312
-494
+836
+24
+1321
+481
 Food in each pile
 time
 food
@@ -300,45 +315,47 @@ true
 true
 "" ""
 PENS
-"food-in-pile1" 1.0 0 -5825686 true "" "plotxy ticks sum [food] of patches with [pcolor = magenta\n]"
-"food-in-pile2" 1.0 0 -2064490 true "" "plotxy ticks sum [food] of patches with [pcolor = pink]"
-"food-in-pile3" 1.0 0 -2674135 true "" "plotxy ticks sum [food] of patches with [pcolor = red]"
-"food-in-pile4" 1.0 0 -1 true "" "plotxy ticks sum [food] of patches with [pcolor = white]"
+"food-in-pile1" 1.0 0 -11221820 true "" "plotxy ticks sum [food] of patches with [pcolor = cyan]"
+"food-in-pile2" 1.0 0 -13791810 true "" "plotxy ticks sum [food] of patches with [pcolor = sky]"
+"food-in-pile3" 1.0 0 -13345367 true "" "plotxy ticks sum [food] of patches with [pcolor = blue]"
+"food-in-pile4" 1.0 0 -5825686 true "" "plotxy ticks sum [food] of patches with [pcolor = magenta\n]"
+"food-in-pile5" 1.0 0 -2064490 true "" "plotxy ticks sum [food] of patches with [pcolor = pink]"
+"food-in-pile6" 1.0 0 -2674135 true "" "plotxy ticks sum [food] of patches with [pcolor = red]"
 
 SLIDER
-19
+35
 333
-191
+207
 366
 x
 x
--40
-40
--40
+-57
+57
+18
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-18
+34
 373
-190
+206
 406
 y
 y
--40
-40
-24
+-48
+48
+-24
 1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-42
+58
 291
-167
+183
 324
 NIL
 create-patch
@@ -353,55 +370,55 @@ NIL
 1
 
 SLIDER
-7
+23
 10
-198
+214
 43
 pourcentage
 pourcentage
 1
 100
-7
+81
 1
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-803
-502
-1076
-520
+844
+504
+1117
+522
 Fourmis rouges : Les ramasseuses
 12
 15.0
 1
 
 TEXTBOX
-805
-519
-1216
-537
+846
+521
+1257
+539
 Fourmis Oranges : Ramasseusses comportant de la nourriture
 12
 25.0
 1
 
 TEXTBOX
-803
-537
-1012
-555
+844
+539
+1053
+557
 Fourmis Bleues : Chercheuses
 12
 105.0
 1
 
 TEXTBOX
-804
-557
-1232
-576
+845
+559
+1273
+578
 Fourmis Vertes : Chercheuses déposant des phéromones
 12
 55.0
@@ -767,6 +784,32 @@ NetLogo 5.1.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="experiment0" repetitions="1" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <final>file-open "ants-near.csv"
+file-print ticks
+file-close</final>
+    <metric>count turtles</metric>
+    <enumeratedValueSet variable="evaporation-rate">
+      <value value="7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="population">
+      <value value="150"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="x">
+      <value value="18"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="y">
+      <value value="-24"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="diffusion-rate">
+      <value value="42"/>
+    </enumeratedValueSet>
+    <steppedValueSet variable="pourcentage" first="1" step="5" last="90"/>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
