@@ -1,4 +1,4 @@
-globals [nb-food-sources] ;; CORTO
+globals [nb-food-sources]
 
 patches-own [
   chemical             ;; amount of chemical on this patch
@@ -30,10 +30,10 @@ to setup-patches
   [ setup-nest
     setup-food
     recolor-patch ]
-set nb-food-sources 3 ;; CORTO ;; 3 food source have been created
+set nb-food-sources 3 ;; 3 food source have been created
 end
 
-to create-patch ;; --CORTO
+to create-patch
   set nb-food-sources nb-food-sources + 1
   ask patches
   [ if (distancexy x y) < 5 ;; setup food source at the given coordinates
@@ -79,8 +79,6 @@ to recolor-patch  ;; patch procedure
     [ if food-source-number = 1 [ set pcolor cyan ]
       if food-source-number = 2 [ set pcolor sky  ]
       if food-source-number = 3 [ set pcolor blue ]
-
-	;; CORTO
       if food-source-number > 3
       [ ifelse food-source-number mod 4 = 0
         [ set pcolor magenta ]
