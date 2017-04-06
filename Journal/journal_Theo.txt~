@@ -18,4 +18,11 @@ Séance annulée.
 ----------------------
 
 30.03.2017 :
+Modification du code pour que la simulation s'arrête quand les tas de nourriture sont tous épuisés.
+Découverte et utilisation de l'outil BehaviorSpace de Netlogo pour étudier l'efficacité des fourmis en fonction de la proportion de ramasseuses.
+Utilisation de GnuPlot pour représenter graphiquement cette évolution.
 
+---------------------
+
+06.04.2017 :
+Travail sur les données expérimentales de la semaine précédente : écriture d'un script Python pour faire la moyenne ligne à ligne des trois expériences, puis utilisation de R pour en extraire un modèle (fonction cube).
