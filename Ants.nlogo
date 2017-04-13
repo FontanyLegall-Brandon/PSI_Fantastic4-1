@@ -1,4 +1,4 @@
-globals [nb-food-sources]
+globals [nb-food-sources pourcentFourm]
 
 patches-own [
   chemical             ;; amount of chemical on this patch
@@ -15,6 +15,7 @@ patches-own [
 to setup
   clear-all
   set-default-shape turtles "bug"
+  set pourcentFourm (pourcentage / (pourcentage + 100)) * 100
   crt pourcentage      ;; chercheuses
   [ set size 2         ;; easier to see
     set color blue  ]   ;; blue = finders
@@ -101,7 +102,7 @@ end
 
 to go  ;; forever button
   if (all? patches [food = 0]) [
-    stop]
+    stop] 
   ask turtles
   [ if who >= ticks [ stop ] ;; delay initial departure
     ifelse color = red or color = blue
@@ -246,7 +247,7 @@ diffusion-rate
 diffusion-rate
 0.0
 99.0
-42
+50
 1.0
 1
 NIL
@@ -261,7 +262,7 @@ evaporation-rate
 evaporation-rate
 0.0
 99.0
-7
+10
 1.0
 1
 NIL
@@ -293,7 +294,7 @@ population
 population
 0.0
 200.0
-99
+101
 1.0
 1
 NIL
@@ -378,7 +379,7 @@ pourcentage
 pourcentage
 1
 200
-162
+70
 1
 1
 NIL
@@ -788,8 +789,9 @@ NetLogo 5.1.0
   <experiment name="experiment0" repetitions="1" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
-    <final>file-open "Ants-middle.csv"
+    <final>file-open "Ants-MiddleV2.csv"
 file-print ticks
+file-print pourcentFourm
 file-close</final>
     <metric>count turtles</metric>
     <enumeratedValueSet variable="evaporation-rate">

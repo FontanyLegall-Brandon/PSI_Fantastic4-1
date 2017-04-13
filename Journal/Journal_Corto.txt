@@ -6,12 +6,18 @@ recherche netlogo pour implémentation du setup des différents patchs. Ajout de
 Annulé à cause de la ronde des facs
 
 30.03 :
-Le code est bien avancé (voir rapport brandon ou théo pour description en détail). Travail sur la production puis utilisation de données en utilisant R ou gnuplot.
+Le code est bien avancé Travail sur la production puis utilisation de données en utilisant R ou gnuplot.
 Debut réflexion rapport Latex.
 
-06.01 :
+06.04 :
 
 Combination des données des test produites par netLogo avec R.
 Rapport latex
+
+13.04 :
+
+Modification du code pour le bouton pourcentage, recréation de données
+
+
 
 
