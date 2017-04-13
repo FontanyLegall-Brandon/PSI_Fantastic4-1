@@ -10,9 +10,9 @@ i = 1
 while len(af) != 0 :
     count = 0
     if af[1] == '\t' :
-        count = int(af[2:]) + int(am[2:]) + int(am[3:])
+        count = int(af[2:]) + int(am[2:]) + int(an[3:])
     else :
-        count = int(af[3:]) + int(am[3:]) + int(am[3:])
+        count = int(af[3:]) + int(am[3:]) + int(an[3:])
     ants_avg.write('{}\t'.format(i)+str(count/3)+'\n')    
     af = ants_far.readline()
     am = ants_middle.readline()

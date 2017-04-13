@@ -16,7 +16,7 @@ Rapport latex
 
 13.04 :
 
-Modification du code pour le bouton pourcentage, recréation de données
+Modification du code pour les pourcentage de chercheuse par rapport à la population de la fourmilière. Lancement d'une batterie de test pour chaque distance. Output et mise en commun.
 
 
 
