@@ -59,13 +59,13 @@ end
 
 to setup-food  ;; patch procedure
   ;; setup food source one on the right
-  if (distancexy (0.6 * max-pxcor) 0) < 5
+  if (distancexy (0.9 * max-pxcor) 0) < 5
   [ set food-source-number 1 ]
   ;; setup food source two on the lower-left
-  if (distancexy (-0.6 * max-pxcor) 0) < 5 ;; original line was : if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
+  if (distancexy (-0.9 * max-pxcor) 0) < 5 ;; original line was : if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
   [ set food-source-number 2 ]
   ;; setup food source three on the upper-left
-  if (distancexy 0 (0.6 * max-pycor)) < 5 ;; original line was : if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
+  if (distancexy 0 (0.9 * max-pycor)) < 5 ;; original line was : if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
   [ set food-source-number 3 ]
   ;; set "food" at sources to either 1 or 2, randomly
   if food-source-number > 0
@@ -789,9 +789,8 @@ NetLogo 5.1.0
   <experiment name="experiment0" repetitions="1" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
-    <final>file-open "Ants-MiddleV2.csv"
-file-print ticks
-file-print pourcentFourm
+    <final>file-open "Ants-farV2.csv"
+file-print pourcentFourm,ticks
 file-close</final>
     <metric>count turtles</metric>
     <enumeratedValueSet variable="evaporation-rate">
@@ -809,7 +808,7 @@ file-close</final>
     <enumeratedValueSet variable="diffusion-rate">
       <value value="42"/>
     </enumeratedValueSet>
-    <steppedValueSet variable="pourcentage" first="1" step="5" last="90"/>
+    <steppedValueSet variable="pourcentage" first="1" step="10" last="200"/>
   </experiment>
 </experiments>
 @#$#@#$#@
