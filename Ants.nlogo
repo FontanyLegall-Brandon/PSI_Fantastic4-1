@@ -59,13 +59,13 @@ end
 
 to setup-food  ;; patch procedure
   ;; setup food source one on the right
-  if (distancexy (0.3 * max-pxcor) 0) < 5
+  if (distancexy (0.8 * max-pxcor) (0.7 * max-pxcor)) < 5
   [ set food-source-number 1 ]
   ;; setup food source two on the lower-left
-  if (distancexy (-0.2 * max-pxcor) 0) < 5 ;; original line was : if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
+  if (distancexy (-0.8 * max-pxcor) (0.8 * max-pxcor)) < 5 ;; original line was : if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
   [ set food-source-number 2 ]
   ;; setup food source three on the upper-left
-  if (distancexy 0 (0.4 * max-pycor)) < 5 ;; original line was : if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
+  if (distancexy (0.7 * max-pxcor) (0.7 * max-pycor)) < 5 ;; original line was : if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
   [ set food-source-number 3 ]
   ;; set "food" at sources to either 1 or 2, randomly
   if food-source-number > 0
