@@ -15,10 +15,10 @@ patches-own [
 to setup
   clear-all
   set-default-shape turtles "bug"
-  crt population - ((population / 100) * (100 - pourcentage))
+  crt pourcentage      ;; chercheuses
   [ set size 2         ;; easier to see
     set color blue  ]   ;; blue = finders
-  crt population - ((population / 100) * pourcentage)
+  crt 100              ;; ramasseuses
   [ set size 2         ;; easier to see
     set color red  ]   ;; red = not carrying food
   setup-patches
@@ -293,7 +293,7 @@ population
 population
 0.0
 200.0
-150
+99
 1.0
 1
 NIL
@@ -377,8 +377,8 @@ SLIDER
 pourcentage
 pourcentage
 1
-100
-81
+200
+162
 1
 1
 NIL
