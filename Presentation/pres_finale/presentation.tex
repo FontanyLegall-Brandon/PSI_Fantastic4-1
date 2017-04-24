@@ -1,0 +1,73 @@
+\documentclass[11pt]{beamer}
+\usetheme{Amsterdam}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\author{Callerisa \and Fontany-Legall \and Qui}
+\title{Modélisation d'une colonie de fourmis}
+%\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+\institute{Université de Nice} 
+\date{\today} 
+%\subject{} 
+\begin{document}
+
+\begin{frame}
+
+\titlepage
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{Contexte}
+\begin{block}{ACO}
+\begin{itemize}
+\item Ant colony optimisation
+\item Travelling Salesman Problem
+\item Exploration de graphes
+\item Besoin d'étudier le comportement des fourmis
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{Recherche de nourriture}
+\begin{itemize}
+\item Chercheuses et ramasseuses
+\item Chercheuses partent en éclaireur
+\item Reviennent quand elles trouvent une source de nourriture et laissent des phéromones
+\item Ramasseuses suivent la trace jusqu'à la nourriture 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Problématique}
+\begin{block}{Direction des recherches}
+\begin{itemize}
+\item La présence de chercheuses a-t-elle une réelle influence sur l'efficacité de la récolte ?
+\item Si oui, quelle est cette influence ?
+\item Comment évolue-t-elle en fonction de le proportion de chercheuses ? 
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modélisation}
+\begin{block}{Hypothèses simplificatrices}
+\begin{itemize}
+\item Deux type de fourmis uniquement
+\item Retrouver le nid à l'instinct
+\item Pas de rivalité avec une autre colonie
+\end{itemize}
+\end{block}
+\end{frame}
+
+\end{document}
