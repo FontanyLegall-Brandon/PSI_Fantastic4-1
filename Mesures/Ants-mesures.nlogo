@@ -1,4 +1,4 @@
-globals [nb-food-sources pourcentFourm]
+globals [nb-food-sources]
 
 patches-own [
   chemical             ;; amount of chemical on this patch
@@ -15,11 +15,10 @@ patches-own [
 to setup
   clear-all
   set-default-shape turtles "bug"
-  set pourcentFourm (pourcentage / (pourcentage + 100)) * 100
-  crt pourcentage      ;; chercheuses
+  crt population - ((population / 100) * (100 - pourcentage))
   [ set size 2         ;; easier to see
     set color blue  ]   ;; blue = finders
-  crt 100              ;; ramasseuses
+  crt population - ((population / 100) * pourcentage)
   [ set size 2         ;; easier to see
     set color red  ]   ;; red = not carrying food
   setup-patches
@@ -59,13 +58,13 @@ end
 
 to setup-food  ;; patch procedure
   ;; setup food source one on the right
-  if (distancexy (0.8 * max-pxcor) (0.7 * max-pxcor)) < 5
+  if (distancexy 8 10) < 5
   [ set food-source-number 1 ]
   ;; setup food source two on the lower-left
-  if (distancexy (-0.8 * max-pxcor) (0.8 * max-pxcor)) < 5 ;; original line was : if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
+  if (distancexy -10 -13) < 5
   [ set food-source-number 2 ]
   ;; setup food source three on the upper-left
-  if (distancexy (0.7 * max-pxcor) (0.7 * max-pycor)) < 5 ;; original line was : if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
+  if (distancexy -5 14) < 5
   [ set food-source-number 3 ]
   ;; set "food" at sources to either 1 or 2, randomly
   if food-source-number > 0
@@ -102,7 +101,7 @@ end
 
 to go  ;; forever button
   if (all? patches [food = 0]) [
-    stop] 
+    stop]
   ask turtles
   [ if who >= ticks [ stop ] ;; delay initial departure
     ifelse color = red or color = blue
@@ -247,7 +246,7 @@ diffusion-rate
 diffusion-rate
 0.0
 99.0
-50
+42
 1.0
 1
 NIL
@@ -262,7 +261,7 @@ evaporation-rate
 evaporation-rate
 0.0
 99.0
-10
+7
 1.0
 1
 NIL
@@ -294,7 +293,7 @@ population
 population
 0.0
 200.0
-101
+150
 1.0
 1
 NIL
@@ -378,8 +377,8 @@ SLIDER
 pourcentage
 pourcentage
 1
-200
-70
+100
+81
 1
 1
 NIL
@@ -789,8 +788,8 @@ NetLogo 5.1.0
   <experiment name="experiment0" repetitions="1" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
-    <final>file-open "Ants-farV2.csv"
-file-print (word pourcentFourm ", " ticks)
+    <final>file-open "ants-near.csv"
+file-print ticks
 file-close</final>
     <metric>count turtles</metric>
     <enumeratedValueSet variable="evaporation-rate">
@@ -808,7 +807,7 @@ file-close</final>
     <enumeratedValueSet variable="diffusion-rate">
       <value value="42"/>
     </enumeratedValueSet>
-    <steppedValueSet variable="pourcentage" first="1" step="10" last="200"/>
+    <steppedValueSet variable="pourcentage" first="1" step="5" last="90"/>
   </experiment>
 </experiments>
 @#$#@#$#@

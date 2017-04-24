@@ -1,5 +1,3 @@
-globals [nb-food-sources pourcentFourm]
-
 patches-own [
   chemical             ;; amount of chemical on this patch
   food                 ;; amount of food on this patch (0, 1, or 2)
@@ -15,11 +13,10 @@ patches-own [
 to setup
   clear-all
   set-default-shape turtles "bug"
-  set pourcentFourm (pourcentage / (pourcentage + 100)) * 100
-  crt pourcentage      ;; chercheuses
+  crt population - ((population / 100) * (100 - pourcentage))
   [ set size 2         ;; easier to see
     set color blue  ]   ;; blue = finders
-  crt 100              ;; ramasseuses
+  crt population - ((population / 100) * pourcentage)
   [ set size 2         ;; easier to see
     set color red  ]   ;; red = not carrying food
   setup-patches
@@ -31,23 +28,6 @@ to setup-patches
   [ setup-nest
     setup-food
     recolor-patch ]
-set nb-food-sources 3 ;; 3 food source have been created
-end
-
-to create-patch
-  set nb-food-sources nb-food-sources + 1
-  ask patches
-  [ if (distancexy x y) < 5 ;; setup food source at the given coordinates
-    [  ;; add a new food source
-      set food-source-number nb-food-sources 
-      set nest? (distancexy 0 0) < 5 ;;, mais un nouveau patch n'est jamais le nid
-      set nest-scent 200 - distancexy 0 0
-      if food-source-number > 0
-       [ set food one-of [1 2] ]
-    ]
-    ;; setup color periodically
-    recolor-patch
-  ]
 end
 
 to setup-nest  ;; patch procedure
@@ -59,13 +39,13 @@ end
 
 to setup-food  ;; patch procedure
   ;; setup food source one on the right
-  if (distancexy (0.8 * max-pxcor) (0.7 * max-pxcor)) < 5
+  if (distancexy (0.6 * max-pxcor) 0) < 5
   [ set food-source-number 1 ]
   ;; setup food source two on the lower-left
-  if (distancexy (-0.8 * max-pxcor) (0.8 * max-pxcor)) < 5 ;; original line was : if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
+  if (distancexy (-0.6 * max-pxcor) (-0.6 * max-pycor)) < 5
   [ set food-source-number 2 ]
   ;; setup food source three on the upper-left
-  if (distancexy (0.7 * max-pxcor) (0.7 * max-pycor)) < 5 ;; original line was : if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
+  if (distancexy (-0.8 * max-pxcor) (0.8 * max-pycor)) < 5
   [ set food-source-number 3 ]
   ;; set "food" at sources to either 1 or 2, randomly
   if food-source-number > 0
@@ -79,19 +59,7 @@ to recolor-patch  ;; patch procedure
   [ ifelse food > 0
     [ if food-source-number = 1 [ set pcolor cyan ]
       if food-source-number = 2 [ set pcolor sky  ]
-      if food-source-number = 3 [ set pcolor blue ]
-      if food-source-number > 3
-      [ ifelse food-source-number mod 4 = 0
-        [ set pcolor magenta ]
-        [ ifelse food-source-number mod 4 = 1
-          [ set pcolor pink]
-          [ ifelse food-source-number mod 4 = 2
-            [ set pcolor red ]
-            [ set pcolor white ] ;; 4th case
-          ]
-        ]
-      ]
-    ]
+      if food-source-number = 3 [ set pcolor blue ] ]
     ;; scale color to show chemical concentration
     [ set pcolor scale-color green chemical 0.1 5 ] ]
 end
@@ -101,8 +69,6 @@ end
 ;;;;;;;;;;;;;;;;;;;;;
 
 to go  ;; forever button
-  if (all? patches [food = 0]) [
-    stop] 
   ask turtles
   [ if who >= ticks [ stop ] ;; delay initial departure
     ifelse color = red or color = blue
@@ -113,10 +79,7 @@ to go  ;; forever button
   diffuse chemical (diffusion-rate / 100)
   ask patches
   [ set chemical chemical * (100 - evaporation-rate) / 100  ;; slowly evaporate chemical
-    recolor-patch 
-    if food = 0
-    [ set nb-food-sources nb-food-sources - 1]
-  ]
+    recolor-patch ]
   tick
 end
 
@@ -138,7 +101,7 @@ to look-for-food  ;; turtle procedure
   [ ifelse color = red 
     [set color orange     ;; pick up food
     set food food - 1]        ;; and reduce the food source
-    [ set color green] ;; blue ant with food -> turn green
+    [ set color green]
     rt 180                   ;; and turn around
     stop ]
   ;; go in the direction where the chemical smell is strongest
@@ -195,12 +158,12 @@ end
 ; See Info tab for full copyright and license.
 @#$#@#$#@
 GRAPHICS-WINDOW
-251
-26
-828
-624
-40
-40
+257
+10
+764
+538
+35
+35
 7.0
 1
 10
@@ -211,10 +174,10 @@ GRAPHICS-WINDOW
 0
 0
 1
--40
-40
--40
-40
+-35
+35
+-35
+35
 1
 1
 1
@@ -222,10 +185,10 @@ ticks
 30.0
 
 BUTTON
-40
-87
-120
-120
+46
+85
+126
+118
 NIL
 setup
 NIL
@@ -239,25 +202,25 @@ NIL
 1
 
 SLIDER
-27
-182
-217
-215
+31
+120
+221
+153
 diffusion-rate
 diffusion-rate
 0.0
 99.0
-50
+49
 1.0
 1
 NIL
 HORIZONTAL
 
 SLIDER
-28
-220
-218
-253
+31
+155
+221
+188
 evaporation-rate
 evaporation-rate
 0.0
@@ -269,10 +232,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-130
-87
-205
-120
+136
+85
+211
+118
 NIL
 go
 T
@@ -286,25 +249,25 @@ NIL
 0
 
 SLIDER
-25
-52
-215
-85
+32
+10
+222
+43
 population
 population
 0.0
 200.0
-101
+120
 1.0
 1
 NIL
 HORIZONTAL
 
 PLOT
-836
-24
-1321
-481
+5
+211
+248
+490
 Food in each pile
 time
 food
@@ -313,114 +276,64 @@ food
 0.0
 120.0
 true
-true
+false
 "" ""
 PENS
 "food-in-pile1" 1.0 0 -11221820 true "" "plotxy ticks sum [food] of patches with [pcolor = cyan]"
 "food-in-pile2" 1.0 0 -13791810 true "" "plotxy ticks sum [food] of patches with [pcolor = sky]"
 "food-in-pile3" 1.0 0 -13345367 true "" "plotxy ticks sum [food] of patches with [pcolor = blue]"
-"food-in-pile4" 1.0 0 -5825686 true "" "plotxy ticks sum [food] of patches with [pcolor = magenta\n]"
-"food-in-pile5" 1.0 0 -2064490 true "" "plotxy ticks sum [food] of patches with [pcolor = pink]"
-"food-in-pile6" 1.0 0 -2674135 true "" "plotxy ticks sum [food] of patches with [pcolor = red]"
 
 SLIDER
-35
-333
-207
-366
-x
-x
--57
-57
-18
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-34
-373
-206
-406
-y
-y
--48
-48
--24
-1
-1
-NIL
-HORIZONTAL
-
-BUTTON
-58
-291
-183
-324
-NIL
-create-patch
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-SLIDER
-23
-10
+42
+47
 214
-43
+80
 pourcentage
 pourcentage
-1
-200
-70
+0
+100
+50
 1
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-844
-504
-1117
-522
-Fourmis rouges : Les ramasseuses
+808
+135
+1058
+153
+Fourmis Rouges : Les ramasseuses
 12
 15.0
 1
 
 TEXTBOX
-846
-521
-1257
-539
-Fourmis Oranges : Ramasseusses comportant de la nourriture
+808
+150
+1224
+168
+Fourmis Oranges : Ramasseuses comportant de la nourriture
 12
 25.0
 1
 
 TEXTBOX
-844
-539
-1053
-557
-Fourmis Bleues : Chercheuses
+808
+166
+1125
+184
+Fourmis Bleues : Les chercheuses
 12
 105.0
 1
 
 TEXTBOX
-845
-559
-1273
-578
-Fourmis Vertes : Chercheuses déposant des phéromones
+807
+181
+1226
+199
+Fourmis Vertes : Chercheuses deposant des pheromones
 12
 55.0
 1
@@ -785,32 +698,6 @@ NetLogo 5.1.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
-<experiments>
-  <experiment name="experiment0" repetitions="1" runMetricsEveryStep="true">
-    <setup>setup</setup>
-    <go>go</go>
-    <final>file-open "Ants-farV2.csv"
-file-print (word pourcentFourm ", " ticks)
-file-close</final>
-    <metric>count turtles</metric>
-    <enumeratedValueSet variable="evaporation-rate">
-      <value value="7"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="population">
-      <value value="150"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="x">
-      <value value="18"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="y">
-      <value value="-24"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="diffusion-rate">
-      <value value="42"/>
-    </enumeratedValueSet>
-    <steppedValueSet variable="pourcentage" first="1" step="10" last="200"/>
-  </experiment>
-</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default

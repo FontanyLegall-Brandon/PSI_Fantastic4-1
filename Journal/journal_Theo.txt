@@ -1,0 +1,42 @@
+9.03.2017 :
+Pre-soutenance. Debut de recherches sur la maniere d'implementer les deux types
+de fourmis + refamiliarisation avec Netlogo.
+Idee : detailler le fonctionnement du code sur papier puis modifier cette version "haut niveau" pour y implanter la gestion des differentes fourmis
+puis recoder cette nouvelle version dans netlogo.
+
+----------------------
+
+16.03.2017 :
+Organigramme pour représenter le code et le modification à y apporter puis, avec Brandon, ajout des fonctionnalités prévues et débugage ;
+La simulation ontient maintenant des fourmis chercheuses et ramasseuses. Les chercheuses rentrent au nid en laissant une trace de phéromones après avoir trouvé de la nourriture puis les ramasseuses suivent cette trace pour récupérer la nourriture.
+
+----------------------
+
+23.03.2017 :
+Séance annulée.
+
+----------------------
+
+30.03.2017 :
+Modification du code pour que la simulation s'arrête quand les tas de nourriture sont tous épuisés.
+Découverte et utilisation de l'outil BehaviorSpace de Netlogo pour étudier l'efficacité des fourmis en fonction de la proportion de ramasseuses.
+Utilisation de GnuPlot pour représenter graphiquement cette évolution.
+
+---------------------
+
+06.04.2017 :
+Travail sur les données expérimentales de la semaine précédente : écriture d'un script Python pour faire la moyenne ligne à ligne des trois expériences, puis utilisation de R pour en extraire un modèle (fonction cube).
+Réflexion sur la validité du modèle netlogo.
+
+---------------------
+
+13.04.2017 :
+Modification du code : le nombre de ramasseuses est fixé à 100, on ne modifie que le nombre de chercheuses.
+Reprise des mesure de la semaine dernière via BehaviorSpace puis des moyennes et extration du modèle sous R.
+
+---------------------
+
+24.04.2017 :
+Rattrapage de la séance du 23.03.
+Relation mathématique trouvée : recherches terminées.
+Préparation du document beamer de présentation en vue de la soutenance du vendredi 28.
