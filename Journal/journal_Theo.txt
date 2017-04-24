@@ -31,5 +31,12 @@ Réflexion sur la validité du modèle netlogo.
 ---------------------
 
 13.04.2017 :
-Modifiation du code : le nombre de ramasseuses est fixé à 100, on ne modifie que le nombre de chercheuses.
+Modification du code : le nombre de ramasseuses est fixé à 100, on ne modifie que le nombre de chercheuses.
 Reprise des mesure de la semaine dernière via BehaviorSpace puis des moyennes et extration du modèle sous R.
+
+---------------------
+
+24.04.2017 :
+Rattrapage de la séance du 23.03.
+Relation mathématique trouvée : recherches terminées.
+Préparation du document beamer de présentation en vue de la soutenance du vendredi 28.
