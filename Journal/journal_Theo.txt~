@@ -26,3 +26,4 @@ Utilisation de GnuPlot pour représenter graphiquement cette évolution.
 
 06.04.2017 :
 Travail sur les données expérimentales de la semaine précédente : écriture d'un script Python pour faire la moyenne ligne à ligne des trois expériences, puis utilisation de R pour en extraire un modèle (fonction cube).
+Réflexion sur la validité du modèle netlogo.
