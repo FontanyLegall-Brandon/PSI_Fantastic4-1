@@ -1,0 +1,50 @@
+Compte rendu du 09-03 :
+
+Durant cette séance nous avons fait la premiere pré-soutenance. Pendant
+la pré-soutenance nous avons nottament pu écouter et donc comparer notre
+projet au autres projets. De plus, nous avons remarquer que notre premiere
+problematique était un peux mégrichonne et donc à revoir. 
+
+Compte rendu du 16-03 :
+
+Durant cette séance, nous avons principalement avancer au niveau de 
+netlogo. Corto a notamment fait toute la partie qui permet d'ajouter
+dynamiquement des tas de nourriture, de mon côté j'ai fais la partie
+avec la gestion des différents types de fourmis, les ramasseuses et 
+les chercheuses. Notamment faire en sorte que les fourmis chercheuses
+cherchent la mourriture et posent des phéromones alors que les rammasseuses
+ne font que porter de la nourriture et ne posent plus des pheromones. Theo
+quand à lui m'a aider sur ma partie. J'ai pu remarquer que notre nouvelle 
+version de fourmis est plus proche de la réalitée vu que la precedente version
+se concentrée sur plusieurs tas alors que maintenant les chercheuses orientent
+toutes les fourmis ramasseuses vers un seul tas, le tas le plus proche.
+
+Compte rendu du 30-03 :
+
+Lors de cette séance, nous avons dans un premier temps modifier le code pour
+avoir des conditions optimales de test. Notamment en enlevant les 3 tas qui 
+se créent lors de l'initialisation. De plus, nous avons rajouter un systeme 
+qui stop la simulation lors que tout les tas, que nous avons créer à divers 
+positions, sont totalement épuisés. Ceci nous permet de récupérer avec 
+precision le dernier tick avant l'épuisement de la nourriture. 
+
+Compte rendu du 06-04 :
+
+Pendant cette séance, nous avons principalement fait du traitement de donnée.
+Nous avons repris les données que nous avons fait precedemment puis, grace au 
+langage R nous avons fait une moyene entre nos trois résultat pour chaque 
+points dans le but de faire une regression linéaire. Nous avons donc obtenue
+l'équation de la courbe qui modélise la moyenne de nos résultats.
+
+Compte rendu du 13-04 :
+
+
+Aujourd'hui nous avons modifier le code du pourcentage et refais toutes les 
+mesures avec ce nouveau pourcentage. Le nouveau pourcentage mettant en rapport
+les fourmis chercheuses avec la population de la fourmiliere sachant que les
+ramasseuses sont fixe.
+
+Compte rendu du 24-04 :
+
+Aujourd'hui nous avons terminé le projet avec notamment le rapport et le
+beamer
