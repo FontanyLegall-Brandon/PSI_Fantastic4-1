@@ -1,4 +1,0 @@
-set terminal png/pdf
-set output "name.png/pdf"
-plot "ants-near.csv" with lines smooth bezier notitle
-exit (gnuplot ne donne pas accès au fichier tant qu'il est ouvert, ERROR)
